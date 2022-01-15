@@ -5,241 +5,170 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-12">
-      <div class="card" style="padding-left: 2%; padding-right: 1%;">
-        <div class="card-header title display-5 text-center" >Registrar Usuario</div>
-          <div class="card-body">
+      <div class="card" >
+        <div class="card-header title display-4 text-center" >
+          <img src="{{asset('images/reg.user.png')}}" >Register User 
+        </div>
 
-
-            <form method="POST" action="{{ route('saveregist') }}" id="formulario" onsubmit="return confirm('¿Confirme si desea guardar User?');">
+        <div class="card-body">
+            <form method="POST" action="{{ route('saveregist') }}" id="formulario" onsubmit="return confirm('¿Confirm if you want to save User?');">
              @csrf
-            
-                <div class="card"><div class="card-body">
-                    <input type="text" placeholder="Nombre(s)" class="form-control" name="name" value="{{ old('name') }}" autocomplete="name" >
-                    <input type="text" placeholder="Apellido(s)"class="form-control" name="last_name" value="{{ old('last_name') }}" autocomplete="last_name" >       
-                    <div  align="center" style="">
-                        <strong style="color:#7A551E;" class="display-6">Nombre de Usuario</strong>
-                        <input id="username" type="text"  name="username" value="{{ old('username') }}" class="username form-control-2" required>
-                        <span class="text-muted text-center display-8"> debe contener: entre 5-10 caractes Alfa-numericos, !debe ser unico!</span>
-                        @if ($errors->has('username'))
-                          <br><small class="display-7 text-danger text-center">verifique nombre de usuario</small>
-                        @endif
-                    </div>
-                </div></div>
-
-
-
-
-
-<!-- 
-los privilegios esta definidos de la siguiente forma:
-Usuario administador: opciones de drop, add, edit, show 
-Usuario con privilegios: opciones de add, edit y show
-Usuario colaborador: aolo edit y show
-Usuario con recursos: solo puede ver
-
-El  privilerio a determinada accion (nivel) va ir de acuerdo a la funcion y rol dentro de la empresa/organizacion sin violar la integridad de la empresa u informacion y/o operaciones de la aplicacion web-->
-
-
-
-
-
-
-
-
-
-
-<!-- ROLES -->
-    <div class="card" >
-              <div class="title display-7 text-center text-danger"> Privilegios</div>
-          <div class="card-body">
-                <div  class="flex">
-                    <div  class="">
-                      <select name="role" id="role" class="form-control" value="{{ old('role') }}"  onclick="userRole()" required>
-                         <option value="">Indique rol</option>
-                         @foreach($roles as $rol)
-                           <option value="{{$rol->id}}">{{$rol->name}}</option>
-                         @endforeach   
-                      </select> 
-                        @if ($errors->has('role'))
-                          <div class="display-8"> indique role</div>
-                        @endif                                 
-                   </div>&nbsp;&nbsp;&nbsp;&nbsp;
-
-
-                  <div>
-                        <li style="list-style:none">
-                          <input type="radio" name="nivel" value="1" style="display: none;" id="nivel1">
-                          <small id="rol1" style="display: none" class="display-7 text-danger">
-                          <img src="{{asset('images/icons/delet.png')}}"><br>Agregar, Actualizar, Eliminar, Ver</small>
-                        </li>
-                        <li style="list-style:none">
-                           <input type="radio" name="nivel" value="2" style="display: none;" id="nivel2">
-                          <small id="rol2" style="display: none" class="display-7 text-primary"><img src="{{asset('images/icons/rol2.png')}}" width="50"><br>Agregar, Actualizar, Ver</small>
-                        </li>
-                        <li style="list-style:none">
-                           <input type="radio" name="nivel" value="3" style="display: none;" id="nivel3">
-                            <small id="rol3" style="display: none" class="display-7 text-success">
-                            <img src="{{asset('images/icons/editar.png')}}"><br>Actualizar, Ver</small>
-                        </li>
-                        <li style="list-style:none">
-                          <input type="radio" name="nivel" value="4" style="display: none;" id="nivel4">
-                          <small id="rol4" class="display-6 text-warning" style="display: none">Solo
-                          <img src="{{asset('images/icons/show.png')}}"><br>
-                          </small>
-                        </li>
-                  </div>
-
-                                  
-                  <div class="img-rol-user" style="margin-left: 2%;">
-                        <img src="{{asset('images/roles.png')}}" width="80" height="100"> 
-                      </div> 
-                  
-                  <div style="width: 35%;margin-left: 10%" align="center">
-                     <label>
-                          <b>¿como defino un privilegio?</b><br>
-                          * Usuario administador: tiene opciones de: agregar, actualizar, eliminar y ver<br>
-                          <b>* Usuario con privilegios:</b> tiene opciones de agregar, actualizar y ademas ver <br>
-                          * Usuario colaborador:  actualizar y ver <br>
-                          <b>* Usuario con recursos:</b> solo puede ver<br>
-                     </label>                    
-                  </div>
-                </div>
-                <div class=" text-success text-center font-weight-bold font-italic">
-                   <b>El  privilerio determinada la accion e ira de acuerdo a la funcion y rol dentro de la empresa/organizacion sin violar la integridad de la misma u informacion y/o operaciones de la aplicacion web</b>
-                </div>
-
-
-
-
-
-
-</div></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <!-- EMAIL -->
-                  <div>     
-                    <input id="email" type="email"  class="form-control"  name="email"  placeholder="email@example.com"  required autocomplete="email" style="padding: 0.5%; font-size: 1.5rem;">
+             <div class="card">
+              <div class="card-body" style="background:   #7accfa">
+                <input type="text" placeholder="Name(s)" class="form-control" name="name" value="{{ old('name') }}" autocomplete="name" style="padding: 0.5%; font-size: 1rem;" >
+                <input type="text" placeholder="last_name(s)"class="form-control" name="last_name" value="{{ old('last_name') }}" autocomplete="last_name" style="padding: 0.5%; font-size: 1rem;margin-top: 1%;">
+                <div>     
+                  <input id="email" type="email"  class="form-control"  name="email"  placeholder="email@example.com"  required autocomplete="email" style="padding: 0.5%; font-size: 1.5rem; margin-top: 2%;">
                     @if ($errors->has('email'))
-                      <div class="display-7 text-danger">verif email</di>                 
-                    @endif 
-                  </div>
+                    <div class="display-7 text-danger">verif email</diV>                 
+                     @endif 
+                </div>
+              <BR>
+      
+
+
+<!-- PRIVILEGES -->
+    <div class="card" style="background: #c4e9f7 ">
+      <div class="title display-5 text-center" style=" word-spacing: 0.25em;"> Privileges</div>
+        <div class="card-body">
+          <div  class="flex">
+            <div class="img-rol-user">
+              <img src="{{asset('images/roles.png')}}"  onmouseover="this.width=200;this.height=100;" onmouseout="this.width=100;this.height=80;" width="50" height="50"> 
+            </div>                              
+        
+            <div style="margin-left: 5%">
+              <div align="left">
+               <b class="display-6"  >¿How do i define a privilege?</b><br>
+               <img src="{{asset('images/icons/priv.png')}}" width="20"> <b>Admin -></b> Tool <br>
+               <img src="{{asset('images/icons/priv.png')}}" width="20"> <b>UP -></b> Add, Update, Delete <br>
+               <img src="{{asset('images/icons/priv.png')}}" width="20"> <b>UC -></b>  Update y Show<br>
+               <img src="{{asset('images/icons/priv.png')}}" width="20"> <b>UR -></b> Show<br>
+             </div>                    
+            </div>
+
+            <div  style="margin-left: 5%;">
+              <select name="role" id="role" class="" value="{{ old('role') }}"  onclick="userRole()" required style="padding: 3%; color: red; font-size: 1.5rem;color:  #060fa1 ">
+                <option value="">--Select Role--</option>
+                @foreach($roles as $rol)
+                  <option value="{{$rol->id}}">{{$rol->name}}</option>
+                @endforeach   
+              </select> 
+              @if ($errors->has('role'))
+                <div class="display-8">
+                indicate role
+               </div>
+              @endif
+                
+              <div style="margin-left: 20%; margin-top: 3%;">               
+                <input type="radio" name="nivel" value="1" style="display: none;" id="nivel1">
+                <small id="rol1" style="display: none" class="display-7 text-danger">
+                  <img src="{{asset('images/icons/delet.png')}}" width="50">
+                  <img src="{{asset('images/icons/editar.png')}}" width="40">
+                  <img src="{{asset('images/icons/show.png')}}" width="30">
+                </small>                        
+                <input type="radio" name="nivel" value="2" style="display: none;" id="nivel2">
+                <small id="rol2" style="display: none" class="display-7 text-primary">
+                  <img src="{{asset('images/icons/editar.png')}}" width="40">
+                  <img src="{{asset('images/icons/show.png')}}" width="30">
+                </small>                      
+                  <input type="radio" name="nivel" value="3" style="display: none;" id="nivel3">
+                  <small id="rol3" style="display: none" class="display-7 text-success">
+                    <img src="{{asset('images/icons/editar.png')}}" width="40">
+                    <img src="{{asset('images/icons/show.png')}}" width="30">&nbsp;&nbsp;<small class="text-danger">¡con restrinciòn!</small>
+                  </small>                        
+                  <input type="radio" name="nivel" value="4" style="display: none;" id="nivel4">
+                  <small id="rol4" class="display-6 text-warning" style="display: none">
+                    <img src="{{asset('images/icons/show.png')}}" width="30" >
+                  </small>                
+                </div>                               
+            </div>
+          </div>       
+        <div class="text-center display-8 font-weight-bold font-italic" style="margin-top: 0; margin-left: 5%; margin-right: 15%; color:  #060fa1 ">
+          <b>El  privilerio determiná la funcion y rol dentro de la empresa/organizacion, preservando la integridad de la misma y el adecuado manejo de la aplicacion web</b>
+        </div>
 
 
 
 
 
 
-   <br>  
+      </div>
+    </div>
+
+
 
 <!-- PREGUNTAS DE SEGURIDAD 3 por usuario registrado-->
           
-      <div class="card">
-        <div class="title display-7 text-center text-danger"> Preguntas de segutidad</div>
-          <div class="card-body">
-                    <select name="question1" class="form-control">
-                        <option value="">Seleccione...</option>
-                      @foreach($quests as $q)
-                        <option value="{{$q->id}}">{{$q->question}}</option>
-                      @endforeach
-                    </select>
-                     <div  class="answer"> 
-                      <input type="text" name="answer1" class="form-control" placeholder="Respuesta">
-                    </div>
-                   
+      <div class="card" style="background:  #c4e9f7">
+        <div class="display-6 text-center"> Preguntas de segutidad</div>
           
-                <select name="question2" class="form-control">
-                        <option value="">Seleccione...</option>
-                      @foreach($quests as $q)
-                        <option value="{{$q->id}}">{{$q->question}}</option>
-                      @endforeach
-                    </select>
-                    <div  class="answer" > 
-                      <input type="text" name="answer2" class="form-control" placeholder="Respuesta" >
-                    </div>
-              </div>
+            <div class="flex">
+                <select name="question1">
+                  <option value="">Seleccione...</option>
+                  @foreach($quests as $q)
+                   <option value="{{$q->id}}">{{$q->question}}</option>
+                  @endforeach
+                </select>
+                <input type="text" name="answer1" placeholder="Answer" class="form-control">
             </div>
-         
-
-
-
-<br><br>
-
-
-
-             <!-- password - CONFIRME password-->
-  <div class="card">
-          <div class="card-body">
-                    <strong>Password</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="text-muted display-8">caractes Alfa-numericos</span>
-                    <input id="password" type="password" class="form-control @error('password') errores @enderror" name="password" placeholder="Password" required>
-                      <input id="password-confirm" type="password" name="password_confirmation"  placeholder="Confirmatión" class="form-control" required>
-                
-                  <div class="help-block text-danger">
-                    @if ($errors->first('password') )
-                      <strong> las contaseña no coinside</strong>
-                    @endif
-                  </div>
-
-
-      </div></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
-                  <div align="center">      
-                    <input type="submit" name="btnsave" class="bt-save tex-bt btn btn-primary btn-block" onclick="pregunta()" value="Guardar"/> 
-                    <input type="reset" value="Borrar" class="btn btn-warning bt-canc" >
-                    <img src="{{asset('images/icons/clear.png')}}"class="img-clear" style="cursor: pointer;"  title="borrar">        
-                  </div>
-            </form>
-          </div>
+            <div class="flex">
+                <select name="question2" >
+                  <option value="">Seleccione...</option>
+                  @foreach($quests as $q)
+                   <option value="{{$q->id}}">{{$q->question}}</option>
+                  @endforeach
+                </select>
+                <input type="text" name="answer2" class="form-control" placeholder="Answer" >            
+            </div>
+           
         </div>
+         
+         </div>
+
+
+<br>
+  <!-- USER -->
+  <div  align="center" style="">
+        <strong style="color:#7A551E;" class="display-4">Name User</strong>
+        <input id="username" type="text"  name="username" value="{{ old('username') }}" class="username form-control-2" required>
+        <p class="zoomItext"> It must contain: between 5-10 Alpha-numeric characters, it must be unique!</p>
+        @if ($errors->has('username'))
+          <br>
+          <small class="display-7 text-danger text-center">verify username</small>
+        @endif
+        </div>
+               
+  <!-- password - CONFIRME password-->
+  <div class="card">
+      <div class="card-body">
+        <strong class="display-6">Password</strong>
+        <input id="password" type="password" class="form-control @error('password') errores @enderror" name="password" placeholder="Password" required>
+        <input id="password-confirm" type="password" name="password_confirmation"  placeholder="Confirmatión" class="form-control" required>
       </div>
+        <div class="help-block text-danger">
+          @if ($errors->first('password') )
+            <strong> las contaseña no coinside</strong>
+          @endif
+        </div>
+
+      </div>
+  </div>
+
+
+                
+  <div align="center">      
+    <input type="submit" name="btnsave" class="bt-save tex-bt btn btn-primary btn-block" onclick="pregunta()" value="Guardar"/> 
+  </div>
+
+
+  </form>
+ 
+
+    </div>
+  </div>
+</div>
+
+    <img src="{{asset('images/icons/clear.png')}}"class="img-clear-2" style="cursor: pointer;"  title="limpiar" onclick="funtClear()" >       
 
          <div align="left" style=";">
             <a href="{{ route('AdmUser') }}" title="ir atras">
@@ -254,4 +183,5 @@ El  privilerio a determinada accion (nivel) va ir de acuerdo a la funcion y rol 
  
 
  <script src="{{ asset('js/user_role.js') }}"></script>
+ <script src="{{ asset('js/clear.js') }}"></script>
 @endsection

@@ -2196,24 +2196,13 @@ pre code {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.form-control-2 {
-  display: block;
-  width: 70%;
-  height: calc(1.6em + 0.75rem + 2px);
-  padding: 0.175rem 0.50rem;
-  font-weight: 400;
-  line-height: 1.6;
-  color: #495057;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
+
 
 @media (prefers-reduced-motion: reduce) {
   .form-control {
     transition: none;
   }
+
 }
 
 .form-control::-ms-expand {

@@ -114,11 +114,8 @@ class ParticipantsComponent extends Component
     	// $requestPart = new RequestStorePart();
     	// $this->validate($requestPart->rules(), $requestPart->messages());
 		$this->validate(['cedula' => 'required|numeric','name'=>'required','last_name'=>'required','email' =>'required|email']); 
-<<<<<<< HEAD
 	
 		            Route::get('/downloadpdf',[ComponentPdf::class,'downloadpdf']);
-=======
->>>>>>> Tuto-Eloq
                                
 		$part = Participant::create([
 		'cedula' => $this->cedula,
